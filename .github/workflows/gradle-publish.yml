@@ -1,0 +1,75 @@
+name: Build and Release Jar
+
+on:
+  push:
+    tags:
+      - 'v*' # 태그가 v로 시작하는 경우 실행
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 소스 코드 체크아웃
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Java 설치
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # Gradle 캐시 설정
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle
+
+      # Gradle 빌드
+      - name: Build Jar
+        run: ./gradlew jar
+
+      # 빌드 결과 확인
+      - name: Verify Jar
+        run: ls build/libs
+
+      # 아티팩트 업로드
+      - name: Upload Jar Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: stomptester-jar
+          path: build/libs/*.jar
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      # 소스 코드 체크아웃
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # GitHub Release 생성
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          body: |
+            자동 생성된 릴리스입니다.
+          draft: false
+          prerelease: false
+
+      # Release에 Jar 파일 첨부
+      - name: Upload Jar to Release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: build/libs/*.jar
+          asset_name: stomptester-${{ github.ref_name }}.jar
+          asset_content_type: application/java-archive
