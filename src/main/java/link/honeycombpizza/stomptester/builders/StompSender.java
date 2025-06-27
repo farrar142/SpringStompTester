@@ -1,4 +1,4 @@
-package link.honeycombpizza.link.stomptester.builders;
+package link.honeycombpizza.stomptester.builders;
 
 public class StompSender {
     private String destination;

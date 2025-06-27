@@ -1,7 +1,7 @@
-package link.honeycombpizza.link.stomptester.results;
+package link.honeycombpizza.stomptester.results;
 
 
-import link.honeycombpizza.link.stomptester.StompResultActions;
+import link.honeycombpizza.stomptester.StompResultActions;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;

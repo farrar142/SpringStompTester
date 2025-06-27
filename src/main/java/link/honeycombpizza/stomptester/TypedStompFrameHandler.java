@@ -1,4 +1,4 @@
-package link.honeycombpizza.link.stomptester;
+package link.honeycombpizza.stomptester;
 
 import org.springframework.messaging.simp.stomp.StompFrameHandler;
 import org.springframework.messaging.simp.stomp.StompHeaders;

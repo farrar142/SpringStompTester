@@ -1,14 +1,13 @@
-package link.honeycombpizza.link.stomptester;
+package link.honeycombpizza.stomptester;
 
 
-import link.honeycombpizza.link.stomptester.results.StompResultHandler;
-import link.honeycombpizza.link.stomptester.results.StompResultMatcher;
+import link.honeycombpizza.stomptester.results.StompResultHandler;
+import link.honeycombpizza.stomptester.results.StompResultMatcher;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.function.Function;
 
 
 public class StompResultActions<T>{

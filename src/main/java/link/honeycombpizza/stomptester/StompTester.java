@@ -1,8 +1,8 @@
-package link.honeycombpizza.link.stomptester;
+package link.honeycombpizza.stomptester;
 
-import link.honeycombpizza.link.stomptester.builders.StompConnectionBuilder;
-import link.honeycombpizza.link.stomptester.builders.StompSender;
-import link.honeycombpizza.link.stomptester.builders.StompSubscription;
+import link.honeycombpizza.stomptester.builders.StompConnectionBuilder;
+import link.honeycombpizza.stomptester.builders.StompSender;
+import link.honeycombpizza.stomptester.builders.StompSubscription;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.messaging.simp.stomp.StompSession;
