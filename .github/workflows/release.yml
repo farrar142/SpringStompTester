@@ -1,7 +1,9 @@
 name: Build and Release Jar
 
 on:
-  push:
+  push: # 모든 push 이벤트에서 실행
+    branches:
+      - main # main 브랜치에 푸시된 경우 실행
     tags:
       - 'v*' # 태그가 v로 시작하는 경우 실행
 
@@ -73,3 +75,4 @@ jobs:
           asset_path: build/libs/*.jar
           asset_name: stomptester-${{ github.ref_name }}.jar
           asset_content_type: application/java-archive
+
