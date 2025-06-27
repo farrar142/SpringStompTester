@@ -12,7 +12,7 @@ permissions: # GITHUB_TOKEN 권한 설정
   actions: write # 추가적으로 Actions 권한을 부여
 
 jobs:
-  build:
+  buildandrelease:
     runs-on: ubuntu-latest
 
     steps:
@@ -43,15 +43,6 @@ jobs:
       # 빌드 결과 확인
       - name: Verify Jar
         run: ls build/libs
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      # 소스 코드 체크아웃
-      - name: Checkout code
-        uses: actions/checkout@v3
 
       # GitHub Release 생성
       - name: Create Release
