@@ -59,6 +59,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # 아티팩트 다운로드
+      - name: Download Jar Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: stomptester-jar
+
       # GitHub Release 생성
       - name: Create Release
         id: create_release
@@ -76,7 +82,7 @@ jobs:
       - name: Upload Jar to Release
         uses: actions/upload-release-asset@v1
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # 올바른 upload_url 전달
-          asset_path: build/libs/*.jar
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: stomptester-jar/*.jar # 다운로드된 아티팩트 경로 사용
           asset_name: stomptester-${{ github.ref_name }}.jar
           asset_content_type: application/java-archive
