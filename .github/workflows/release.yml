@@ -42,7 +42,7 @@ jobs:
 
       # 아티팩트 업로드
       - name: Upload Jar Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4 # 최신 버전으로 업데이트
         with:
           name: stomptester-jar
           path: build/libs/*.jar
@@ -75,4 +75,3 @@ jobs:
           asset_path: build/libs/*.jar
           asset_name: stomptester-${{ github.ref_name }}.jar
           asset_content_type: application/java-archive
-
