@@ -45,7 +45,7 @@ jobs:
 
       # 아티팩트 업로드
       - name: Upload Jar Artifact
-        uses: actions/upload-artifact@v4 # 최신 버전으로 업데이트
+        uses: actions/upload-artifact@v4
         with:
           name: stomptester-jar
           path: build/libs/*.jar
@@ -61,7 +61,7 @@ jobs:
 
       # GitHub Release 생성
       - name: Create Release
-        id: create_release # ID를 추가하여 출력값을 참조 가능하게 설정
+        id: create_release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ github.ref_name }}
@@ -70,7 +70,7 @@ jobs:
             자동 생성된 릴리스입니다.
           draft: false
           prerelease: false
-          skipIfReleaseExists: true # 올바른 옵션으로 수정
+          allowUpdates: true # 기존 릴리스가 존재하면 업데이트를 허용
 
       # Release에 Jar 파일 첨부
       - name: Upload Jar to Release
@@ -80,4 +80,3 @@ jobs:
           asset_path: build/libs/*.jar
           asset_name: stomptester-${{ github.ref_name }}.jar
           asset_content_type: application/java-archive
-
