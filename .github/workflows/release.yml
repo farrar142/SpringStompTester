@@ -64,12 +64,13 @@ jobs:
         id: create_release # ID를 추가하여 출력값을 참조 가능하게 설정
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ github.ref_name }}
+          tag: ${{ github.ref_name }}-1
           name: Release ${{ github.ref_name }}
           body: |
             자동 생성된 릴리스입니다.
           draft: false
           prerelease: false
+          skip_if_release_exists: true # 기존 릴리스가 존재하면 릴리스 생성을 건너뜁니다.
 
       # Release에 Jar 파일 첨부
       - name: Upload Jar to Release
