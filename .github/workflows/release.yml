@@ -9,6 +9,7 @@ on:
 
 permissions: # GITHUB_TOKEN 권한 설정
   contents: write # 릴리스 생성 및 파일 업로드를 위한 권한
+  actions: write # 추가적으로 Actions 권한을 부여
 
 jobs:
   build:
@@ -43,6 +44,15 @@ jobs:
       - name: Verify Jar
         run: ls build/libs
 
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      # 소스 코드 체크아웃
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       # GitHub Release 생성
       - name: Create Release
         id: create_release
@@ -61,6 +71,7 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/libs/stomptester-1.0-SNAPSHOT-plain.jar # 압축 해제된 .jar 파일 경로 사용
+          asset_path: build/libs/stomptester-1.0-SNAPSHOT-plain.jar
           asset_name: stomptester-${{ github.ref_name }}.jar
           asset_content_type: application/java-archive
+
