@@ -7,6 +7,9 @@ on:
     tags:
       - 'v*' # 태그가 v로 시작하는 경우 실행
 
+permissions: # GITHUB_TOKEN 권한 설정
+  contents: write # 릴리스 생성 및 파일 업로드를 위한 권한
+
 jobs:
   build:
     runs-on: ubuntu-latest
