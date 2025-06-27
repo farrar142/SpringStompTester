@@ -65,6 +65,14 @@ jobs:
         with:
           name: stomptester-jar
 
+      # 압축 해제
+      - name: Unzip Artifact
+        run: unzip stomptester-jar.zip -d extracted
+
+      # 압축 해제된 파일 확인
+      - name: Verify Extracted Files
+        run: ls extracted
+
       # GitHub Release 생성
       - name: Create Release
         id: create_release
@@ -83,6 +91,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: stomptester-jar/stomptester.jar # 정확한 파일 경로 지정
+          asset_path: extracted/*.jar # 압축 해제된 .jar 파일 경로 사용
           asset_name: stomptester-${{ github.ref_name }}.jar
           asset_content_type: application/java-archive
