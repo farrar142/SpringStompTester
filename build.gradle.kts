@@ -29,6 +29,5 @@ tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar
 // jar 작업 활성화 및 출력 경로 확인
 tasks.jar {
     archiveBaseName.set("stomptester")
-    archiveVersion.set(version)
     destinationDirectory.set(file("build/libs")) // 출력 경로 설정
 }
