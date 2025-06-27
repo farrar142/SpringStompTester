@@ -67,7 +67,7 @@ jobs:
 
       # 압축 해제
       - name: Unzip Artifact
-        run: unzip stomptester-jar.zip -d extracted
+        run: unzip stomptester-jar -d extracted
 
       # 압축 해제된 파일 확인
       - name: Verify Extracted Files
