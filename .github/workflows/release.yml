@@ -61,6 +61,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/libs/*.jar # 압축 해제된 .jar 파일 경로 사용
+          asset_path: build/libs/stomptester-1.0-SNAPSHOT-plain.jar # 압축 해제된 .jar 파일 경로 사용
           asset_name: stomptester-${{ github.ref_name }}.jar
           asset_content_type: application/java-archive
