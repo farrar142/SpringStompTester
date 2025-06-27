@@ -39,6 +39,10 @@ jobs:
       - name: Build Jar
         run: ./gradlew jar
 
+      # 빌드 결과 확인
+      - name: Verify Jar
+        run: ls build/libs
+
       # GitHub Release 생성
       - name: Create Release
         id: create_release
