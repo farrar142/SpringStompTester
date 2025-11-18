@@ -70,6 +70,20 @@ jobs:
       - name: Verify Downloaded Artifact
         run: ls artifact
 
+      # 준비: 다운로드한 JAR을 단일 파일명으로 고정
+      - name: Prepare asset file
+        run: |
+          set -e
+          echo "Downloaded files:"
+          ls -la artifact
+          JAR_FILE=$(ls artifact/*.jar 2>/dev/null | head -n 1 || true)
+          if [ -z "$JAR_FILE" ]; then
+            echo "No jar found in artifact folder" >&2
+            exit 1
+          fi
+          echo "Using jar: $JAR_FILE"
+          mv "$JAR_FILE" artifact/stomptester-main.jar
+
       # GitHub Release 생성
       - name: Create Release
         id: create_release
@@ -88,6 +102,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifact/*.jar
+          asset_path: ./artifact/stomptester-main.jar
           asset_name: stomptester-${{ github.ref_name }}.jar
           asset_content_type: application/java-archive
