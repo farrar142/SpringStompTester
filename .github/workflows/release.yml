@@ -64,10 +64,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: stomptester-jar
+          path: artifact
 
       # 다운로드된 파일 확인
       - name: Verify Downloaded Artifact
-        run: ls
+        run: ls artifact
 
       # GitHub Release 생성
       - name: Create Release
@@ -87,6 +88,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: stomptester-jar # 정확한 파일 경로 지정
+          asset_path: ./artifact/*.jar
           asset_name: stomptester-${{ github.ref_name }}.jar
           asset_content_type: application/java-archive
